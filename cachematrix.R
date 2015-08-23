@@ -1,5 +1,7 @@
+##
 ## File: cachematrix.R 
 ## Author: Tony Donadio
+##
 ## Description: cachematrix.R is a solution to Programming
 ##   Assignment 2 for the Coursera R Programming class. It
 ##   provides functions that allow the creation and use of
@@ -20,9 +22,8 @@ makeCacheMatrix <- function(x = matrix()) {
     inv = NULL
     verbose = FALSE
     #
-    #
-    # This function sets a flag to determine whether text  
-    #  messages are written to the console.
+    # The setVerbose function sets a flag to determine 
+    #  whether text messages are written to the console.
     #
     setVerbose <- function(flag) {
         verbose <<- flag
@@ -96,48 +97,3 @@ cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
     x$cacheSolve(...)
 }
-##
-## testCacheSolve() just runs some tests to show that
-##  the functions of the module work correctly.
-##
-testCacheSolve <- function() {
-    A = matrix(c(8.387, 85.793, 86.247, 49.393,
-        71.637, 37.291, 75.260, 11.484, 35.496),3,3)
-    B = matrix(c(9.247, 74.020, 74.882, 68.360,
-        54.358, 67.503, 24.664, 52.418, 82.322),3,3)
-    cat("\nMatrix A:\n")
-    print(A)
-    cat("\nMatrix B:\n")
-    print(B)
-    cacheMatrixA <- makeCacheMatrix(A)
-    cacheMatrixB <- makeCacheMatrix(B)
-    cacheMatrixA$setVerbose(TRUE)
-    #
-    cat("\nInverse of A:\n")
-    print(solve(A))
-    cat("\nCached inverse of A:\n")
-    print(cacheMatrixA$cacheSolve())
-    cat("\nCached inverse of A again:\n")
-    print(cacheSolve(cacheMatrixA))
-    cat("\nDifference (should be the zero matrix):\n")
-    print(solve(A) - cacheSolve(cacheMatrixA))
-    #
-    cat("\nInverse of B:\n")
-    print(solve(B))
-    cat("\nCached inverse of B:\n")
-    print(cacheSolve(cacheMatrixB))
-    cat("\nCached inverse of B again:\n")
-    print(cacheMatrixB$cacheSolve())
-    cat("\nDifference (should be the zero matrix):\n")
-    print(solve(B) - cacheMatrixB$cacheSolve())
-    #
-    cat("\nCached inverse of A with respect to B (using ...):\n")
-    print(solve(A,B))
-    cacheMatrixA$set(A)
-    cacheMatrixB$set(B)
-    cat("\n The same using cached matrices:\n")
-    print(cacheMatrixA$cacheSolve(cacheMatrixB$get()))
-    cat("\nDifference (should be the zero matrix):\n")
-    print(solve(A,B) - cacheMatrixA$cacheSolve(cacheMatrixB$get()))
-}
-
